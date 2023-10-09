@@ -71,7 +71,9 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        //
+        return view('ideas.show', [
+            'idea' => $idea
+        ]);
     }
 
     /**
@@ -105,6 +107,13 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-        //
+        // this is an example delete id, without binding
+        // $idea = Idea::where('id', $id)->firstOrFail()->delete();
+        // $idea->delete();
+        // Idea::destroy($idea->id);
+        // Idea::destroy($idea);
+        // or
+        $idea->delete();
+        return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');
     }
 }

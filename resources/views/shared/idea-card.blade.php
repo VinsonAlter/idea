@@ -9,6 +9,14 @@
                         </a></h5>
                 </div>
             </div>
+            <div>
+                <form method="post" action="{{route('ideas.destroy', $idea->id)}}">
+                    @csrf
+                        @method('delete')
+                        <button class="btn btn-danger btn-sm"> X </button>
+                </form>
+                <a href="{{route('ideas.show', $idea->id)}}">View</a>
+            </div>
         </div>
     </div>
     
