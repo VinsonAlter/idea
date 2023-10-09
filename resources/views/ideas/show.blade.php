@@ -40,11 +40,7 @@
             @include('shared.success-message')
             <hr>
             <div class="mt-3">
-                @foreach($ideas as $idea)
-                    <div class="mt-3">
-                       @include('shared.idea-card')
-                    </div>
-                @endforeach
+                @include('shared.idea-card')
             </div>
         </div>
         <div class="col-3">
