@@ -50,13 +50,15 @@ class IdeaController extends Controller
         
         // adding validation
         request()->validate([
-            'idea' => 'required|min:5|max:240',
+            'content' => 'required|min:5|max:240',
         ]);
 
         // the above method can be shortened into this
         $idea = Idea::create([
-            'content' => request()->input('idea')
+            'content' => request()->input('content')
         ]);
+
+        $idea->save();
         
         return redirect()->route('dashboard')->with('success', 'Idea created successfully');
 
@@ -71,9 +73,11 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        return view('ideas.show', [
-            'idea' => $idea
-        ]);
+        // return view('ideas.show', [
+        //     'idea' => $idea
+        // ]);
+        // above function can be shortened via compact function
+        return view('ideas.show', compact('idea'));
     }
 
     /**
@@ -84,7 +88,8 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
-        //
+        $editing = true;
+        return view('ideas.show', compact('idea', 'editing'));
     }
 
     /**
@@ -96,7 +101,16 @@ class IdeaController extends Controller
      */
     public function update(Request $request, Idea $idea)
     {
-        //
+        request()->validate([
+            'idea' => 'required|min:5|max:240',
+        ]);
+
+        $idea->content = request()->get('content', '');
+
+        // the above method can be shortened into this
+        // $idea = Idea::create([
+        //     'content' => request()->input('CO')
+        // ]);
     }
 
     /**

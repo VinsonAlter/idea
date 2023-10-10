@@ -1,4 +1,5 @@
 @extends('layout.layout')
+
 @section('container')
     <div class="row">
         <div class="col-3">
@@ -40,7 +41,9 @@
             @include('shared.success-message')
             <hr>
             <div class="mt-3">
-                @include('shared.idea-card')
+                <div class="mt-3">
+                    @include('shared.idea-card')
+                </div>
             </div>
         </div>
         <div class="col-3">
