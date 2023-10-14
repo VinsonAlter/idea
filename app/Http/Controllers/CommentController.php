@@ -36,8 +36,8 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        // dd(request()->all());
-        dump(request()->all());
+        dd(request()->all());
+        // dump(request()->all());
     }
 
     /**
