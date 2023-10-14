@@ -28,6 +28,8 @@ Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->name('ideas.upda
 
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy');
 
+Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
+
 Route::get('/terms', function() {
     return view('terms');
 });
