@@ -56,8 +56,8 @@ class IdeaController extends Controller
             'content' => 'required|min:5|max:240',
         ]);
 
-        dump(request()->all());
-        dd($validated);
+        // dump(request()->all());
+        // dd($validated);
 
         // the above method can be shortened into this
         // $idea = Idea::create([
