@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -13,28 +13,18 @@ class AuthController extends Controller
     }
 
     public function store() {
-        // validate
         $validated = request()->validate([
             'name' => 'required|min:3|max:40',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8'
         ]);
 
-        // i think this should suffice
-        // User::create($validated);
-
-        // but tutorial guy want to set one by one
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password'])
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Account created successfully!');
-
-        // create user
-        // login
-        // return redirect
-
+        return redirect()->route('dashboard')->with('success', 'User registered successfully!');
     }
 }
