@@ -30,6 +30,10 @@ Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('ideas.
 
 Route::post('/ideas/{idea}/comments', [CommentController::class, 'store'])->name('ideas.comments.store');
 
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+
+Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
+
 Route::get('/terms', function() {
     return view('terms');
 });

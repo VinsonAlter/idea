@@ -49,16 +49,26 @@ class IdeaController extends Controller
         // $idea->save();
         
         // adding validation
-        request()->validate([
+        // request()->validate([
+        //     'content' => 'required|min:5|max:240',
+        // ]);
+        $validated = request()->validate([
             'content' => 'required|min:5|max:240',
         ]);
 
-        // the above method can be shortened into this
-        $idea = Idea::create([
-            'content' => request()->input('content')
-        ]);
+        dump(request()->all());
+        dd($validated);
 
-        $idea->save();
+        // the above method can be shortened into this
+        // $idea = Idea::create([
+        //     'content' => request()->input('content')
+        // ]);
+
+        // $idea = Idea::create(request()->all());
+
+        // $idea->save();
+
+        Idea::create($validated);
         
         return redirect()->route('dashboard')->with('success', 'Idea created successfully');
 
@@ -77,6 +87,8 @@ class IdeaController extends Controller
         //     'idea' => $idea
         // ]);
         // above function can be shortened via compact function
+        // dd($idea->comments);
+
         return view('ideas.show', compact('idea'));
     }
 
@@ -101,19 +113,28 @@ class IdeaController extends Controller
      */
     public function update(Request $request, Idea $idea)
     {
-        request()->validate([
-            'content' => 'required|min:5|max:240',
-        ]);
+        // request()->validate([
+        //     'content' => 'required|min:5|max:240',
+        // ]);
 
-        $idea->content = request()->get('content', '');
-        $idea->save();
+        // $idea->content = request()->get('content', '');
+        // $idea->save();
 
-        return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea updated successfully');
+        
 
         // the above method can be shortened into this
         // $idea = Idea::create([
         //     'content' => request()->input('CO')
         // ]);
+
+        // replacing above inefficient one with validated tech
+        $validated = request()->validate([
+            'content' => 'required|min:5|max:240',
+        ]);
+
+        $idea->update($validated);
+
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Idea updated successfully');
     }
 
     /**
