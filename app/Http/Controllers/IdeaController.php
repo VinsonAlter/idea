@@ -104,6 +104,10 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
+        if(Auth::user()->id !== $idea->user_id) {
+            abort(403);
+        }
+
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
     }
@@ -131,6 +135,10 @@ class IdeaController extends Controller
         //     'content' => request()->input('CO')
         // ]);
 
+        if(Auth::user()->id !== $idea->user_id) {
+            abort(403);
+        }
+
         // replacing above inefficient one with validated tech
         $validated = request()->validate([
             'content' => 'required|min:5|max:240',
@@ -155,6 +163,10 @@ class IdeaController extends Controller
         // Idea::destroy($idea->id);
         // Idea::destroy($idea);
         // or
+        if(auth()->id !== $idea->user_id) {
+            abort(403);
+        }
+
         $idea->delete();
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');
     }
