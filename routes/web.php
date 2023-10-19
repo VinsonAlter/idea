@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,8 @@ Route::resource('ideas', IdeaController::class)->only(['show']);
 // ideas/{idea}/comments
 // to pass these to laravel route:resource, you can
 Route::resource('ideas.comments', CommentController::class)->only(['store'])->middleware('auth');
+
+Route::resource('users', UserController::class)->only(['show', 'edit', 'update'])->middleware('auth');
 
 Route::get('/terms', function() {
     return view('terms');

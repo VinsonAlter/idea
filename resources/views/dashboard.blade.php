@@ -8,16 +8,20 @@
             @include('shared.success-message')
             @include('shared.submit-idea')
             <hr>
-            <div class="mt-3">
-                @foreach($ideas as $idea)
+            
+            {{-- <div class="mt-3"> --}}
+                @forelse($ideas as $idea)
                     <div class="mt-3">
                        @include('shared.idea-card')
                     </div>
-                @endforeach
-                <div class="mt-3">
-                    {{$ideas->links()}}
-                </div>
+                @empty
+                    <p class="text-center my-3">No Result Found</p>
+                @endforelse
+            
+            <div class="mt-3">
+                {{$ideas->links()}}
             </div>
+            {{-- </div> --}}
         </div>
         <div class="col-3">
             @include('shared.search-bar')
