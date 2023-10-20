@@ -10,7 +10,7 @@
             
             <div class="mt-3">
                 <div class="mt-3">
-                    @include('shared.user-card')
+                    @include('shared.user-edit-card')
                 </div>
             </div>
             <hr>
