@@ -47,7 +47,7 @@ class UserController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route('profile')->with('', '');
+        return redirect()->route('profile');
     }
 
     public function profile()

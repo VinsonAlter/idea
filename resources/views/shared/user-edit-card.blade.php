@@ -8,8 +8,8 @@
                     <img style="width:150px" class="me-3 avatar-sm rounded-circle"
                         src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
                     <div>
-                        <input name="user" value="{{$user->name}}" type="text" class="form-control">
-                        @error('user')
+                        <input name="name" value="{{$user->name}}" type="text" class="form-control">
+                        @error('name')
                             <span class="text-danger fs-6">{{$message}}</span>
                         @enderror
                     </div>
