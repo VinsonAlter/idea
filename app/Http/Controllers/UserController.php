@@ -45,7 +45,7 @@ class UserController extends Controller
             'image' => 'image',
         ]);
 
-        $user->update($validated);
+        User::where('id', $user->id)->update($validated);
 
         return redirect()->route('profile');
     }

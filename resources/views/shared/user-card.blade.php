@@ -20,9 +20,7 @@
         <div class="px-2 mt-4">
             <h5 class="fs-5"> Bio : </h5>
                 <p class="fs-6 fw-light">
-                    This book is a treatise on the theory of ethics, very popular during the
-                    Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
-                    from a line in section 1.10.32.
+                    {{$user->bio}}
                 </p>
             <div class="d-flex justify-content-start">
                 <a href="#" class="fw-light nav-link fs-6 me-3"> <span class="fas fa-user me-1">

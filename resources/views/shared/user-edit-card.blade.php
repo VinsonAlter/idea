@@ -32,7 +32,7 @@
             <div class="px-2 mt-4">
                 <h5 class="fs-5"> Bio : </h5>
                 <div class="mb-3">
-                    <textarea name="bio" class="form-control" id="bio" rows="3"></textarea>
+                    <textarea name="bio" class="form-control" id="bio" rows="3">{{$user->bio}}</textarea>
                     @error('bio')
                         <span class="d-block fs-6 text-danger mt-2">{{$message}}</span>
                     @enderror
