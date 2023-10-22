@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -23,6 +25,9 @@ class DashboardController extends Controller
         // return view('dashboard', [
         //     'users' => $users
         // ]);
+
+        // return preview of Email
+        // return new WelcomeEmail(Auth::user());
 
         // check if there is a search
         // if there is, check the search value with our data

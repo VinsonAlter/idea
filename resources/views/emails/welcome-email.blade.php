@@ -1,1 +1,2 @@
-<h1> Thanks for joining </h1>
+<h1> Thanks for joining {{$user->name}}</h1>
+<p>testing</p>

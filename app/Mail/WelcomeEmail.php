@@ -8,19 +8,23 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
+use Illuminate\Mail\Mailables\Attachment;
 
 class WelcomeEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    private User $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -31,7 +35,7 @@ class WelcomeEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Thanks for joining ' . config('app.name',''),
+            subject: 'Thanks for joining ' . config('app.name','')
         );
     }
 
@@ -43,7 +47,10 @@ class WelcomeEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.welcome-email',
+            view: 'emails.welcome-email',
+            with: [
+                'user' => $this->user
+            ],
         );
     }
 
@@ -54,6 +61,8 @@ class WelcomeEmail extends Mailable
      */
     public function attachments()
     {
-        return [];
+        return [
+            Attachment::fromStorageDisk('public', 'profile/l8yZfGfdIoV45OurTAkoGnIGwpUD8tA5qUi0JaYr.jpg')
+        ];
     }
 }

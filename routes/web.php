@@ -54,4 +54,4 @@ Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])->m
 
 Route::get('/terms', function() {
     return view('terms');
-});
+})->name('terms');
