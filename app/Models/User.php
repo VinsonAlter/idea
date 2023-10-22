@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
-        'bio'
+        'bio    '
     ];
 
     /**
@@ -50,5 +50,21 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function followings() {
+        return $this->belongsToMany(User::class, 'follower_user', 'follower_id', 'user_id')->withTimeStamps();
+    }
+
+    public function followers() {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimeStamps();
+    }
+
+    public function getImageURL() {
+        if($this->image) {
+            return url('storage/'.$this->image);
+        } else {
+            return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$this->name}}";
+        }
     }
 }

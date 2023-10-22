@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:150px" class="me-3 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Mario" alt="Mario Avatar">
+                    src="{{$user->getImageURL()}}" alt="Mario Avatar">
                 <div>
                     <h3 class="card-title mb-0"><a href="#"> {{$user->name}}</a></h3>
                     <span class="fs-6 text-muted">{{$user->email}}</span>
@@ -33,7 +33,10 @@
             @auth
                 @if(Auth::id() !== $user->id) 
                     <div class="mt-3">
-                        <button class="btn btn-primary btn-sm"> Follow </button>
+                        <form method="post" action="{{route('users.follow', $user->id)}}">
+                            @csrf
+                            <button class="btn btn-primary btn-sm"> Follow </button>
+                        </form>
                     </div>
                 @endif
             @endauth
