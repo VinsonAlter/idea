@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
@@ -65,3 +66,6 @@ Route::get('/feed', FeedController::class)->middleware('auth')->name('feed');
 Route::get('/terms', function() {
     return view('terms');
 })->name('terms');
+
+// accessing admin page
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);

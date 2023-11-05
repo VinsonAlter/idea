@@ -104,9 +104,16 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
-        if(Auth::user()->id !== $idea->user_id) {
-            abort(403);
-        }
+        // if(Auth::user()->id !== $idea->user_id) {
+        //     abort(403);
+        // }
+
+        // via gate authorization
+        // $this->authorize('idea.edit', $idea);
+
+        // via policy
+        // delete is the name of function inside policy
+        $this->authorize('update', $idea);
 
         $editing = true;
         return view('ideas.show', compact('idea', 'editing'));
@@ -128,12 +135,17 @@ class IdeaController extends Controller
         // $idea->content = request()->get('content', '');
         // $idea->save();
 
-        
-
         // the above method can be shortened into this
         // $idea = Idea::create([
         //     'content' => request()->input('CO')
         // ]);
+        
+        // via gate authorization
+        // $this->authorize('idea.edit', $idea);
+
+        // via policy
+        // delete is the name of function inside policy
+        $this->authorize('update', $idea);
 
         if(Auth::user()->id !== $idea->user_id) {
             abort(403);
@@ -163,9 +175,16 @@ class IdeaController extends Controller
         // Idea::destroy($idea->id);
         // Idea::destroy($idea);
         // or
-        if(auth()->id !== $idea->user_id) {
-            abort(403);
-        }
+        // if(auth()->id !== $idea->user_id) {
+        //     abort(403);
+        // }
+        
+        // gate authorization
+        // $this->authorize('idea.delete', $idea);
+
+        // via policy
+        // delete is the name of function inside policy
+        $this->authorize('delete', $idea);
 
         $idea->delete();
         return redirect()->route('dashboard')->with('success', 'Idea deleted successfully');

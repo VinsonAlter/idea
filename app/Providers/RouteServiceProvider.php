@@ -17,7 +17,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+
+     /* laravel guest middleware redirect to this path */
+    // public const HOME = '/home';
+    // redirect to main route if the user is already login
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
