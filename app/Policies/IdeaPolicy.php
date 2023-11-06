@@ -33,8 +33,9 @@ class IdeaPolicy
      */
     public function update(User $user, Idea $idea)
     {
-        // edit / update
-        return ($user->is_admin || $user->id === $idea->user_id);
+        // edit / update, can be shortened via is
+        // return ($user->is_admin || $user->id === $idea->user_id);
+        return ($user->is_admin || $user->is($idea->user));
     }
 
     /**
@@ -46,7 +47,8 @@ class IdeaPolicy
      */
     public function delete(User $user, Idea $idea)
     {
-        // destroy
-        return ($user->is_admin || $user->id === $idea->user_id);
+        // destroy, can be shortened via is
+        // return ($user->is_admin || $user->id === $idea->user_id);
+        return ($user->is_admin || $user->is($idea->user));
     }
 }

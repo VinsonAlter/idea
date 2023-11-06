@@ -26,7 +26,7 @@
                         <a class="{{Route::is('profile') ? 'active' : ''}} nav-link" href="{{route('profile')}}">{{Auth::user()->name}}</a>
                     </li>
                     <li class="nav-item">
-                        <form action="{{route('logout')}}" method="post">
+                        <form action="{{route('logout')}}" method="get">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-danger">Logout</button>
                         </form>

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'image',
         'bio',
-        'is_admin'
+        'is_admin'  
     ];
 
     /**
@@ -43,6 +43,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // 'password' => 'hashed'
     ];
 
     public function ideas() {

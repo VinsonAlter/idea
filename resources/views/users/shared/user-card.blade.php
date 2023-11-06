@@ -3,18 +3,22 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:150px" class="me-3 avatar-sm rounded-circle"
-                    src="{{$user->getImageURL()}}" alt="Mario Avatar">
+                    src="{{$user->getImageURL()}}" alt="{{$user->name}}">
                 <div>
                     <h3 class="card-title mb-0"><a href="#"> {{$user->name}}</a></h3>
                     <span class="fs-6 text-muted">{{$user->email}}</span>
                 </div>
             </div>
             <div>
-                @auth
-                    @if(Auth::id() === $user->id)
+                {{-- @auth --}}
+                    <!-- changing if condition with can method -->
+                    {{-- @if(Auth::id() === $user->id)
                         <a href="{{route('users.edit', $user->id)}}">Edit</a>
-                    @endif
-                @endauth
+                    @endif --}} 
+                    @can('update', $user)
+                        <a href="{{route('users.edit', $user->id)}}">Edit</a>
+                    @endcan
+                {{-- @endauth --}}
             </div>
         </div>
         <div class="px-2 mt-4">
@@ -24,7 +28,9 @@
             </p>
             @include('users.shared.user-stats')
             @auth
-                @if(Auth::id() !== $user->id) 
+                {{-- @if(Auth::id() !== $user->id)  --}}
+                <!-- or alternatively -->
+                @if(Auth::user()->isNot($user))
                     <div class="mt-3">
                         @if(Auth::user()->follows($user))
                             <form method="post" action="{{route('users.unfollow', $user->id)}}">
