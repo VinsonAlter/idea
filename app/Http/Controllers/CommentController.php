@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(CreateCommentRequest $request, Idea $idea) {
+    public function store(CreateCommentRequest $request , Idea $idea) {
         // dd($request->content);
         // $comment = new Comment;
         // $comment->idea_id = $idea->id;
@@ -22,6 +22,8 @@ class CommentController extends Controller
         // $validated = request()->validate([
         //     'content' => 'required|min:3|max:240'
         // ]);
+
+        // dd($idea->id);
 
         // validation via form request
         $validated = $request->validated();
