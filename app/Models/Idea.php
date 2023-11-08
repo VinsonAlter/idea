@@ -19,6 +19,7 @@ class Idea extends Model
     [
         "user_id", 
         "content",
+        "idea_id"
     ];
 
     protected $with = [

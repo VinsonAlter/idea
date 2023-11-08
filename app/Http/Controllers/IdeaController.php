@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateIdeaRequest;
+use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +36,7 @@ class IdeaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateIdeaRequest $request)
     {
         // dd(request()->get('idea', ''));
 
@@ -53,9 +55,12 @@ class IdeaController extends Controller
         // request()->validate([
         //     'content' => 'required|min:5|max:240',
         // ]);
-        $validated = request()->validate([
-            'content' => 'required|min:5|max:240',
-        ]);
+        // $validated = request()->validate([
+        //     'content' => 'required|min:5|max:240',
+        // ]);
+
+        // via form request
+        $validated = $request->validated();
 
         // $validated['user_id'] = auth()->user()->id;
         $validated['user_id'] = Auth::user()->id;
@@ -126,7 +131,7 @@ class IdeaController extends Controller
      * @param  \App\Models\Idea  $idea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idea $idea)
+    public function update(UpdateIdeaRequest $request, Idea $idea)
     {
         // request()->validate([
         //     'content' => 'required|min:5|max:240',
@@ -147,14 +152,17 @@ class IdeaController extends Controller
         // delete is the name of function inside policy
         $this->authorize('update', $idea);
 
-        if(Auth::user()->id !== $idea->user_id) {
-            abort(403);
-        }
+        // if(Auth::user()->id !== $idea->user_id) {
+        //     abort(403);
+        // }
 
         // replacing above inefficient one with validated tech
-        $validated = request()->validate([
-            'content' => 'required|min:5|max:240',
-        ]);
+        // $validated = request()->validate([
+        //     'content' => 'required|min:5|max:240',
+        // ]);
+
+        // validation via Form Request
+        $validated = $request->validated();
 
         $idea->update($validated);
 
