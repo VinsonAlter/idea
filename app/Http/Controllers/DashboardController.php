@@ -31,7 +31,10 @@ class DashboardController extends Controller
 
         // check if there is a search
         // if there is, check the search value with our data
+        // eager loading stuffs via withCount()
         $ideas = Idea::orderBy('created_at', 'DESC');
+
+        // $ideas = Idea::withCount('likes')->orderBy('created_at', 'DESC');
 
         if(request()->has('search')){
             $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');

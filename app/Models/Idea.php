@@ -27,6 +27,8 @@ class Idea extends Model
         'comments.user:id,name,image'
     ];
 
+    protected $withCount = ['likes'];
+
     public function comments() {
         return $this->hasMany(Comment::class);
     }
