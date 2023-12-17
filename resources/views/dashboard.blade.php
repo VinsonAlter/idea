@@ -1,4 +1,11 @@
 @extends('layout.layout')
+
+{{-- @section('title')
+    Dashboard
+@endsection --}}
+{{-- the above function can be shortened as below, since it's only passing a string --}}
+@section('title', 'dashboard')
+
 @section('container')
     <div class="row">
         <div class="col-3">
