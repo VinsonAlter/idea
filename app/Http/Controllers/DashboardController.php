@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -39,9 +40,16 @@ class DashboardController extends Controller
         if(request()->has('search')){
             $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
         }
-        
+
+        // count the number of ideas that each user has
+        // stored inside global view inside function boot at AppServiceProvider
+        // $topUsers = User::withCount('ideas')
+        //             ->orderBy('ideas_count', 'DESC')
+        //             ->limit(5)->get();
+
         return view('dashboard', [
-            'ideas' => $ideas->paginate(5)->withQueryString()
+            'ideas' => $ideas->paginate(5)->withQueryString(),
+            // 'topUsers' => $topUsers
         ]);
     }
 }

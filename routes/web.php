@@ -9,6 +9,7 @@ use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// for language translation routes
+Route::get('lang/{lang}', function($lang) {
+    App::setLocale($lang);
+    // need to store the Locale inside a session
+    session()->put('locale', $lang);
+    // get the currently set locale for app
+    // dd(App::getLocale());
+    return redirect()->route('dashboard');
+})->name('lang');
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function() {
