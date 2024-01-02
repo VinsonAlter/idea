@@ -25,8 +25,15 @@ class FeedController extends Controller
         $ideas = Idea::whereIn('user_id', $followingsIds)->latest();
 
         if(request()->has('search')){
-            $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
+            // $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
+            // replace the above function with scopes,
+            $ideas = $ideas->search(request('search', ''));
         }
+
+        // shorthanded function for if statements, via when function, also allows chaining your function
+        // $ideas->Ideas::when(request()->has('search'), function($query) {
+        //     $query->search(request('search', ''));
+        // })->latest();
         
         return view('dashboard', [
             'ideas' => $ideas->paginate(5)->withQueryString()

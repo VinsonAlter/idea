@@ -38,8 +38,16 @@ class DashboardController extends Controller
         // $ideas = Idea::withCount('likes')->orderBy('created_at', 'DESC');
 
         if(request()->has('search')){
-            $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
+            // $ideas = $ideas->where('content', 'like', '%' . request()->get('search', '') . '%');
+            // replace the above function with scopes instead
+            $ideas = $ideas->search(request('search', ''));
         }
+
+        // shorthanded function for if statements, via when function
+        // shorthanded function for if statements, via when function, also allows chaining your function
+        // $ideas->Ideas::when(request()->has('search'), function($query) {
+        //     $query->search(request('search', ''));
+        // })->orderBy('created_at', 'DESC');
 
         // count the number of ideas that each user has
         // stored inside global view inside function boot at AppServiceProvider
