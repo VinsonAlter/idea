@@ -20,6 +20,6 @@ class UserPolicy
     {
         // return $user->id === $model->id;
         // Alternatively, use this
-        return $user->is($model);
+        return ($user->is_admin || $user->is($model));
     }
 }

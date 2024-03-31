@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\IdeaController as AdminIdeaController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
@@ -10,7 +12,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IdeaLikeController;
 use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;   
 
 /*
 |--------------------------------------------------------------------------
@@ -80,4 +82,15 @@ Route::get('/terms', function() {
 })->name('terms');
 
 // accessing admin page
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
+Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(function() {
+    Route::get('', [AdminDashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+    // replace above with route resource
+    Route::resource('users', AdminUserController::class)->only('index');
+    
+    // Route::get('/ideas', [AdminUserController::class, 'index'])->name('ideas');
+    // replace above with route resource
+    Route::resource('ideas', AdminIdeaController::class)->only('index');
+});
+
+
