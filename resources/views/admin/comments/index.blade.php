@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('title', 'Ideas | Admin Dashboard')
+@section('title', 'Comments | Admin Dashboard')
 
 @section('container')
     <div class="row">
@@ -8,37 +8,40 @@
           @include('admin.shared.left-sidebar')
         </div>
         <div class="col-9">
-            <h1>Ideas</h1>
+            <h1>Comments</h1>
 
             <table class="table table-striped mt-3"> 
                 <thead class="table-dark"> 
                     <tr>
                         <th>ID</th>
                         <th>User</th>
+                        <th>Idea</th>
                         <th>Content</th>
                         <th>Created at</th>
                         <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($ideas as $idea)
+                    @foreach($comments as $comment)
                         <tr>
-                            <td>{{$idea->id}}</td>
+                            <td>{{$comment->id}}</td>
                             <td>
-                                <a href="{{route('users.show', $idea->user)}}">{{$idea->user->name}}</a>
+                                <a href="{{route('users.show', $comment->user)}}">{{$comment->user->name}}</a>
                             </td>
-                            <td>{{$idea->content}}</td>
-                            <td>{{$idea->created_at->toDateString()}}</td>
                             <td>
-                                <a href="{{route('ideas.show', $idea)}}">View</a>
-                                <a href="{{route('ideas.edit', $idea)}}">Edit</a>
+                                <a href="{{route('ideas.show', $comment->idea->id)}}">{{$comment->idea->id}}</a>
+                            </td>
+                            <td>{{$comment->content}}</td>
+                            <td>{{$comment->created_at->toDateString()}}</td>
+                            <td>
+                                -
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
             <div>
-                {{$ideas->links()}}
+                {{$comments->links()}}
             </div>
         </div>
     </div>
