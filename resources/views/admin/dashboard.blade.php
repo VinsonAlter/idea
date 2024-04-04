@@ -14,21 +14,21 @@
                     @include('shared.widget', [
                         'title' => 'Total Users',
                         'icon' => 'fas fa-users',
-                        'data' => 12,
+                        'data' => $totalUsers,
                     ])
                 </div>
                 <div class="col-sm-6 col-md-4">
                     @include('shared.widget', [
-                        'title' => 'Total Users',
-                        'icon' => 'fas fa-users',
-                        'data' => 12,
+                        'title' => 'Total Ideas',
+                        'icon' => 'far fa-lightbulb',
+                        'data' => $totalIdeas,
                     ])
                 </div>
                 <div class="col-sm-6 col-md-4">
                     @include('shared.widget', [
-                        'title' => 'Total Users',
-                        'icon' => 'fas fa-users',
-                        'data' => 12,
+                        'title' => 'Total Comments',
+                        'icon' => 'far fa-comment',
+                        'data' => $totalComments,
                     ])
                 </div>
             </div>
